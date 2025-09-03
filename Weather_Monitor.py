@@ -5,7 +5,6 @@ import json
 import numpy as np
 from datetime import datetime, timedelta
 
-# Configuration
 USE_LIVE_DATA = False  # Set to True to use live API data
 
 # List of target cities
@@ -32,7 +31,7 @@ def create_sample_weather_data():
     """Create sample weather data for demonstration"""
     print("Generating sample weather data for demonstration...")
     
-    # Weather-specific events only
+
     weather_events = [
         {'type': 'Thunderstorm Warning', 'severity': 'severe', 'score': 3, 'urgency': 'Immediate'},
         {'type': 'Heavy Rain Warning', 'severity': 'moderate', 'score': 2, 'urgency': 'Expected'},
@@ -60,7 +59,7 @@ def create_sample_weather_data():
     
     return records
 
-# Fetch data
+
 if USE_LIVE_DATA:
     raw_data = fetch_live_data()
     data_source = "Live DWD API"
@@ -195,7 +194,6 @@ else:
     # Reorder to match our target cities list
     severity_summary = severity_summary.reindex(target_cities)
     
-    # Visualization
     plt.figure(figsize=(12, 7))
     colors = ['crimson' if score > 0 else 'lightgreen' for score in severity_summary.values]
     bars = plt.barh(severity_summary.index, severity_summary.values, color=colors)
@@ -258,4 +256,5 @@ if USE_LIVE_DATA and raw_data and len(raw_data) > 0 and other_alerts_found > 0:
                 print(f"Title: {title}")
                 print(f"Type: {item.get('type', 'Unknown')}")
                 print(f"Severity: {item.get('severity', 'Unknown')}")
+
                 print("-" * 40)
